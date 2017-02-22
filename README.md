@@ -10,11 +10,27 @@ h5ai is a modern file indexer for HTTP web servers with focus on your files. Dir
 
 h5ai is already packaged but it is not very useful as is. The best way is to install h5ai locally in the folder you want to serve and to mount this folder into the container:
 
+Generate user and password
+
+
+```
+htpasswd -c conf/.htpasswd-sample test
+cat conf/.htpasswd-sample
+  test:$apr1$VigJ2CaK$gjDsIhRfYOe2qgslJcVXr1
+```
+
 ```
 wget https://release.larsjung.de/h5ai/h5ai-0.27.0.zip
 unzip h5ai-0.27.0.zip -d /some/folder
 docker run -d --name h5ai --hostname h5ai -v /srv/seedbox:/var/www vsense/h5ai
 ```
+or
+```
+wget https://release.larsjung.de/h5ai/h5ai-0.27.0.zip
+unzip h5ai-0.27.0.zip -d /some/folder
+docker run -d --name h5ai --hostname h5ai -v /srv/seedbox:/var/www -v conf/myhtpasswd:/etc/nginx/htpasswd vsense/h5ai
+```
+
 Then you can access http://containerIP. Exposed port are 80 and 443. To bind them on the host:
 
 ```

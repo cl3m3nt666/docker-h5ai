@@ -20,6 +20,7 @@ RUN apk add --update  \
     && rm -rf /var/cache/apk/* /tmp/*
 
 COPY nginx.conf /etc/nginx/nginx.conf
+COPY conf/htpasswd /etc/nginx/htpasswd
 
 EXPOSE 80 443
 
